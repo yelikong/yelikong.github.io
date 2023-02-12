@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>琉璃夜空的世界</title>
+  
+  <subtitle>琉璃夜空</subtitle>
+  <link href="https://yelikong.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://yelikong.github.io/"/>
+  <updated>2023-02-12T08:01:48.695Z</updated>
+  <id>https://yelikong.github.io/</id>
+  
+  <author>
+    <name>hydrangea</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Activiti基础</title>
+    <link href="https://yelikong.github.io/2023/02/11/activiti-ji-chu/"/>
+    <id>https://yelikong.github.io/2023/02/11/activiti-ji-chu/</id>
+    <published>2023-02-11T12:00:37.000Z</published>
+    <updated>2023-02-12T08:01:48.695Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Activiti7&quot;&gt;&lt;a href=&quot;#Activiti7&quot; class=&quot;headerlink&quot; title=&quot;Activiti7&quot;&gt;&lt;/a&gt;Activiti7&lt;/h1&gt;&lt;h1 id=&quot;一、工作流介绍&quot;&gt;&lt;a href=&quot;#一、工作流介绍&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="Activiti7" scheme="https://yelikong.github.io/categories/Activiti7/"/>
+    
+    
+    <category term="Activiti基础入门篇" scheme="https://yelikong.github.io/tags/Activiti%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E7%AF%87/"/>
+    
+  </entry>
+  
+</feed>
