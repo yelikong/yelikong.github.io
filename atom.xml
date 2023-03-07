@@ -6,7 +6,7 @@
   <link href="https://hydrangea.space/atom.xml" rel="self"/>
   
   <link href="https://hydrangea.space/"/>
-  <updated>2023-02-13T07:58:21.572Z</updated>
+  <updated>2023-03-07T11:22:18.624Z</updated>
   <id>https://hydrangea.space/</id>
   
   <author>
@@ -17,11 +17,57 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Activiti整合</title>
+    <link href="https://hydrangea.space/2023/03/07/activiti-zheng-he/"/>
+    <id>https://hydrangea.space/2023/03/07/activiti-zheng-he/</id>
+    <published>2023-03-07T11:19:54.000Z</published>
+    <updated>2023-03-07T11:22:18.624Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Activiti整合Spring&quot;&gt;&lt;a href=&quot;#Activiti整合Spring&quot; class=&quot;headerlink&quot; title=&quot;Activiti整合Spring&quot;&gt;&lt;/a&gt;Activiti整合Spring&lt;/h1&gt;&lt;h1</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Activiti整合篇" scheme="https://hydrangea.space/tags/Activiti%E6%95%B4%E5%90%88%E7%AF%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Activiti进阶</title>
+    <link href="https://hydrangea.space/2023/03/07/activiti-jin-jie/"/>
+    <id>https://hydrangea.space/2023/03/07/activiti-jin-jie/</id>
+    <published>2023-03-07T11:06:39.000Z</published>
+    <updated>2023-03-07T11:07:35.565Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Activiti进阶&quot;&gt;&lt;a href=&quot;#Activiti进阶&quot; class=&quot;headerlink&quot; title=&quot;Activiti进阶&quot;&gt;&lt;/a&gt;Activiti进阶&lt;/h1&gt;&lt;h2 id=&quot;一、流程实例&quot;&gt;&lt;a href=&quot;#一、流程实例&quot;</summary>
+        
+      
+    
+    
+    
+    
+    <category term="Activiti进阶篇" scheme="https://hydrangea.space/tags/Activiti%E8%BF%9B%E9%98%B6%E7%AF%87/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Activiti基础</title>
     <link href="https://hydrangea.space/2023/02/11/activiti-ji-chu/"/>
     <id>https://hydrangea.space/2023/02/11/activiti-ji-chu/</id>
     <published>2023-02-11T12:00:37.000Z</published>
-    <updated>2023-02-13T07:58:21.572Z</updated>
+    <updated>2023-03-07T11:23:42.444Z</updated>
     
     
       
