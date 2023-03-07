@@ -609,6 +609,21 @@
       <span class="token key atrule">path</span><span class="token punctuation">:</span> classpath<span class="token punctuation">:</span>/default<span class="token punctuation">-</span>project.json
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p><strong>注：</strong>所采用activiti版本为7.1.0.M6，出现如下异常需要在 resources目录下添加 <strong>default-project.json</strong>文件</p>
+<pre class="line-numbers language-none"><code class="language-none">org.activiti.api.runtime.shared.UnprocessableEntityException: Process definition with the given id:‘zx:1:70693c00-39e9-11eb-83a7-00ff1ec9ac8e’ belongs to a different application version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>default-project.json</p>
+<pre class="line-numbers language-none"><code class="language-none">{
+  "createdBy": "superadminuser",
+  "creationDate": "2019-08-16T15:58:46.056+0000",
+  "lastModifiedBy": "qa-modeler-1",
+  "lastModifiedDate": "2019-08-16T16:03:41.941+0000",
+  "id": "c519a458-539f-4385-a937-2edfb4045eb9",
+  "name": "projectA",
+  "description": "",
+  "version": "1"
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <h2 id="2-3-编写启动类"><a href="#2-3-编写启动类" class="headerlink" title="2.3 编写启动类"></a>2.3 编写启动类</h2><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>hydrangea</span><span class="token punctuation">;</span>
 
 <span class="token keyword">import</span> <span class="token import"><span class="token namespace">org<span class="token punctuation">.</span>springframework<span class="token punctuation">.</span>boot<span class="token punctuation">.</span></span><span class="token class-name">SpringApplication</span></span><span class="token punctuation">;</span>
@@ -882,22 +897,6 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>注：</strong>所采用activiti版本为7.1.0.M6，出现如下异常需要在 resources目录下添加 <strong>default-project.json</strong>文件</p>
-<pre class="line-numbers language-none"><code class="language-none">org.activiti.api.runtime.shared.UnprocessableEntityException: Process definition with the given id:‘zx:1:70693c00-39e9-11eb-83a7-00ff1ec9ac8e’ belongs to a different application version<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>default-project.json</p>
-<pre class="line-numbers language-none"><code class="language-none">{
-  "createdBy": "superadminuser",
-  "creationDate": "2019-08-16T15:58:46.056+0000",
-  "lastModifiedBy": "qa-modeler-1",
-  "lastModifiedDate": "2019-08-16T16:03:41.941+0000",
-  "id": "c519a458-539f-4385-a937-2edfb4045eb9",
-  "name": "projectA",
-  "description": "",
-  "version": "1"
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 
                 
             </div>
