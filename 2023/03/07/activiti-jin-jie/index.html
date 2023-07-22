@@ -1,0 +1,2093 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Activiti进阶, 琉璃夜空">
+    <meta name="description" content="Activiti进阶一、流程实例什么是流程实例流程实例（ProcessInstance）代表流程定义的执行实例。
+一个流程实例包括了所有的运行节点。我们可以利用这个对象来了解当前流程实例的进度等信息。
+例如：用户或程序按照流程定义内容发起一">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Activiti进阶 | 琉璃夜空</title>
+    <link rel="icon" type="image/jpeg" href="/medias/avatar.jpg">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 5.4.2">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="琉璃夜空" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/avatar.jpg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">琉璃夜空</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>主页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友链</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="" class="waves-effect waves-light">
+
+      
+      <i class="fas fa-list" style="zoom: 0.6;"></i>
+      
+      <span>媒体</span>
+      <i class="fas fa-chevron-down" aria-hidden="true" style="zoom: 0.6;"></i>
+    </a>
+    <ul class="sub-nav menus_item_child ">
+      
+      <li>
+        <a href="/music">
+          
+          <i class="fas fa-music" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Music</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/movies">
+          
+          <i class="fas fa-film" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Movies</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/books">
+          
+          <i class="fas fa-book" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Books</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/galleries">
+          
+          <i class="fas fa-image" style="margin-top: -20px; zoom: 0.6;"></i>
+          
+          <span>Galleries</span>
+        </a>
+      </li>
+      
+    </ul>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/avatar.jpg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">琉璃夜空</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			主页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友链
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="javascript:;">
+			
+				<i class="fa-fw fas fa-list"></i>
+			
+			媒体
+			<span class="m-icon"><i class="fas fa-chevron-right"></i></span>
+		</a>
+            <ul  style="background:  ;" >
+              
+                <li>
+
+                  <a href="/music " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-music" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Music</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/movies " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-film" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Movies</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/books " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-book" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Books</span>
+                  </a>
+                </li>
+              
+                <li>
+
+                  <a href="/galleries " style="margin-left:75px">
+				  
+				   <i class="fa fas fa-image" style="position: absolute;left:50px" ></i>
+			      
+		          <span>Galleries</span>
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Activiti进阶</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Activiti/">
+                                <span class="chip bg-color">Activiti</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-03-07
+                </div>
+                
+
+                
+
+                
+
+                
+
+                
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="Activiti进阶"><a href="#Activiti进阶" class="headerlink" title="Activiti进阶"></a>Activiti进阶</h1><h2 id="一、流程实例"><a href="#一、流程实例" class="headerlink" title="一、流程实例"></a>一、流程实例</h2><h3 id="什么是流程实例"><a href="#什么是流程实例" class="headerlink" title="什么是流程实例"></a>什么是流程实例</h3><p><strong>流程实例</strong>（ProcessInstance）代表流程定义的执行实例。</p>
+<p>一个流程实例包括了所有的运行节点。我们可以利用这个对象来了解当前流程实例的进度等信息。</p>
+<p>例如：用户或程序按照流程定义内容发起一个流程，这就是一个流程实例。</p>
+<p>流程定义和流程实例的图解：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577498489089.png" alt="1577498489089"></p>
+<h3 id="启动流程实例-并添加Businesskey（业务标识）"><a href="#启动流程实例-并添加Businesskey（业务标识）" class="headerlink" title="启动流程实例 并添加Businesskey（业务标识）"></a>启动流程实例 并添加Businesskey（业务标识）</h3><p>流程定义部署在activiti后，就可以在系统中通过activiti去管理该流程的执行，执行流程表示流程的一次执行。</p>
+<p>比如部署系统出差流程后，如果某用户要申请出差这时就需要执行这个流程，如果另外一个用户也要申请出差则也需要执行该流程，每个执行互不影响，每个执行是单独的流程实例。</p>
+<p>启动流程实例时，指定的businesskey，就会在act_ru_execution #流程实例的执行表中存储businesskey。</p>
+<p>Businesskey：业务标识，通常为业务表的主键，业务标识和流程实例一一对应。业务标识来源于业务系统。存储业务标识就是根据业务标识来关联查询业务系统的数据。</p>
+<p>比如：出差流程启动一个流程实例，就可以将出差单的id作为业务标识存储到activiti中，将来查询activiti的流程实例信息就可以获取出差单的id从而关联查询业务系统数据库得到出差单信息。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token comment">/**
+     * 启动流程实例，添加businessKey
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">addBusinessKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        1、得到ProcessEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        2、得到RunTimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        3、启动流程实例，同时还要指定业务标识businessKey，也就是出差申请单id，这里是1001</span>
+        <span class="token class-name">ProcessInstance</span> processInstance <span class="token operator">=</span> runtimeService<span class="token punctuation">.</span>
+                <span class="token function">startProcessInstanceByKey</span><span class="token punctuation">(</span><span class="token string">"myEvection"</span><span class="token punctuation">,</span><span class="token string">"1001"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        4、输出processInstance相关属性</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"业务id=="</span><span class="token operator">+</span>processInstance<span class="token punctuation">.</span><span class="token function">getBusinessKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Activiti的act_ru_execution中存储业务标识：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577261568103.png" alt="1577261568103"></p>
+<h3 id="操作数据库表"><a href="#操作数据库表" class="headerlink" title="操作数据库表"></a>操作数据库表</h3><p>启动流程实例，操作如下数据库表：</p>
+<p>SELECT * FROM act_ru_execution #流程实例执行表，记录当前流程实例的执行情况</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577499812252.png" alt="1577499812252"></p>
+<p>说明：</p>
+<p>流程实例执行，如果当前只有一个分支时，一个流程实例只有一条记录且执行表的主键id和流程实例id相同，如果当前有多个分支正在运行则该执行表中有多条记录，存在执行表的主键和流程实例id不相同的记录。<strong>不论当前有几个分支总会有一条记录的执行表的主键和流程实例</strong>id<strong>相同</strong> </p>
+<p>一个流程实例运行完成，此表中与流程实例相关的记录删除。</p>
+<p>SELECT * FROM act_ru_task #任务执行表，记录当前执行的任务</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577499771599.png" alt="1577499771599"></p>
+<p>说明：启动流程实例，流程当前执行到第一个任务结点，此表会插入一条记录表示当前任务的执行情况，如果任务完成则记录删除。</p>
+<p>SELECT * FROM act_ru_identitylink #任务参与者，记录当前参与任务的用户或组</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577499842115.png" alt="1577499842115"></p>
+<p>SELECT * FROM act_hi_procinst #流程实例历史表</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577499914186.png" alt="1577499914186"></p>
+<p>流程实例启动，会在此表插入一条记录，流程实例运行完成记录也不会删除。</p>
+<p> SELECT * FROM act_hi_taskinst  #任务历史表，记录所有任务</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577499985580.png" alt="1577499985580"></p>
+<p>开始一个任务，不仅在act_ru_task表插入记录，也会在历史任务表插入一条记录，任务历史表的主键就是任务id，任务完成此表记录不删除。</p>
+<p> SELECT * FROM act_hi_actinst  #活动历史表，记录所有活动</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577500036347.png" alt="1577500036347"></p>
+<p>活动包括任务，所以此表中不仅记录了任务，还记录了流程执行过程的其它活动，比如开始事件、结束事件。</p>
+<h3 id="查询流程实例"><a href="#查询流程实例" class="headerlink" title="查询流程实例"></a>查询流程实例</h3><p>流程在运行过程中可以查询流程实例的状态，当前运行结点等信息。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">queryProcessInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		<span class="token comment">// 流程定义key</span>
+		<span class="token class-name">String</span> processDefinitionKey <span class="token operator">=</span> <span class="token string">"evection"</span><span class="token punctuation">;</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">// 获取RunTimeService</span>
+		<span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">ProcessInstance</span><span class="token punctuation">&gt;</span></span> list <span class="token operator">=</span> runtimeService
+				<span class="token punctuation">.</span><span class="token function">createProcessInstanceQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+				<span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>processDefinitionKey<span class="token punctuation">)</span><span class="token comment">//</span>
+				<span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+		<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">ProcessInstance</span> processInstance <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例id："</span>
+					<span class="token operator">+</span> processInstance<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"所属流程定义id："</span>
+					<span class="token operator">+</span> processInstance<span class="token punctuation">.</span><span class="token function">getProcessDefinitionId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"是否执行完成："</span> <span class="token operator">+</span> processInstance<span class="token punctuation">.</span><span class="token function">isEnded</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"是否暂停："</span> <span class="token operator">+</span> processInstance<span class="token punctuation">.</span><span class="token function">isSuspended</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+			<span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"当前活动标识："</span> <span class="token operator">+</span> processInstance<span class="token punctuation">.</span><span class="token function">getActivityId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token punctuation">}</span>
+	<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="关联BusinessKey"><a href="#关联BusinessKey" class="headerlink" title="关联BusinessKey"></a>关联BusinessKey</h4><p>需求：</p>
+<p>在activiti实际应用时，查询流程实例列表时可能要显示出业务系统的一些相关信息，比如：查询当前运行的出差流程列表需要将出差单名称、出差天数等信息显示出来，出差天数等信息在业务系统中存在，而并没有在activiti数据库中存在，所以是无法通过activiti的api查询到出差天数等信息。</p>
+<p>实现：</p>
+<p>在查询流程实例时，通过businessKey（业务标识 ）关联查询业务系统的出差单表，查询出出差天数等信息。</p>
+<p>通过下面的代码就可以获取activiti中所对应实例保存的业务Key。而这个业务Key一般都会保存相关联的业务操作表的主键，再通过主键ID去查询业务信息，比如通过出差单的ID，去查询更多的请假信息（出差人，出差时间，出差天数，出差目的地等）</p>
+<p>String businessKey = processInstance.getBusinessKey();</p>
+<p>在activiti的act_ru_execution表，字段BUSINESS_KEY就是存放业务KEY的。</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1574136375409.png" alt="1574136375409"></p>
+<h3 id="挂起、激活流程实例"><a href="#挂起、激活流程实例" class="headerlink" title="挂起、激活流程实例"></a>挂起、激活流程实例</h3><p>某些情况可能由于流程变更需要将当前运行的流程暂停而不是直接删除，流程暂停后将不会继续执行。</p>
+<h4 id="全部流程实例挂起"><a href="#全部流程实例挂起" class="headerlink" title="全部流程实例挂起"></a>全部流程实例挂起</h4><p>操作流程定义为挂起状态，该流程定义下边所有的流程实例全部暂停：</p>
+<p>流程定义为挂起状态该流程定义将不允许启动新的流程实例，同时该流程定义下所有的流程实例将全部挂起暂停执行。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 全部流程实例挂起与激活
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token class-name">SuspendAllProcessInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取repositoryService</span>
+        <span class="token class-name">RepositoryService</span> repositoryService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRepositoryService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        查询流程定义的对象</span>
+        <span class="token class-name">ProcessDefinition</span> processDefinition <span class="token operator">=</span> repositoryService<span class="token punctuation">.</span><span class="token function">createProcessDefinitionQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">processDefinitionKey</span><span class="token punctuation">(</span><span class="token string">"myEvection"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        得到当前流程定义的实例是否都为暂停状态</span>
+        <span class="token keyword">boolean</span> suspended <span class="token operator">=</span> processDefinition<span class="token punctuation">.</span><span class="token function">isSuspended</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        流程定义id</span>
+        <span class="token class-name">String</span> processDefinitionId <span class="token operator">=</span> processDefinition<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        判断是否为暂停</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>suspended<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//         如果是暂停，可以执行激活操作 ,参数1 ：流程定义id ，参数2：是否激活，参数3：激活时间</span>
+            repositoryService<span class="token punctuation">.</span><span class="token function">activateProcessDefinitionById</span><span class="token punctuation">(</span>processDefinitionId<span class="token punctuation">,</span>
+                    <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    <span class="token keyword">null</span>
+            <span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程定义："</span><span class="token operator">+</span>processDefinitionId<span class="token operator">+</span><span class="token string">",已激活"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+<span class="token comment">//          如果是激活状态，可以暂停，参数1 ：流程定义id ，参数2：是否暂停，参数3：暂停时间</span>
+            repositoryService<span class="token punctuation">.</span><span class="token function">suspendProcessDefinitionById</span><span class="token punctuation">(</span>processDefinitionId<span class="token punctuation">,</span>
+                    <span class="token boolean">true</span><span class="token punctuation">,</span>
+                    <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程定义："</span><span class="token operator">+</span>processDefinitionId<span class="token operator">+</span><span class="token string">",已挂起"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="单个流程实例挂起"><a href="#单个流程实例挂起" class="headerlink" title="单个流程实例挂起"></a>单个流程实例挂起</h4><p>操作流程实例对象，针对单个流程执行挂起操作，某个流程实例挂起则此流程不再继续执行，完成该流程实例的当前任务将报异常。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 单个流程实例挂起与激活
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token class-name">SuspendSingleProcessInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        RuntimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        查询流程定义的对象</span>
+        <span class="token class-name">ProcessInstance</span> processInstance <span class="token operator">=</span> runtimeService<span class="token punctuation">.</span>
+                <span class="token function">createProcessInstanceQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">processInstanceId</span><span class="token punctuation">(</span><span class="token string">"15001"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>
+                <span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        得到当前流程定义的实例是否都为暂停状态</span>
+        <span class="token keyword">boolean</span> suspended <span class="token operator">=</span> processInstance<span class="token punctuation">.</span><span class="token function">isSuspended</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        流程定义id</span>
+        <span class="token class-name">String</span> processDefinitionId <span class="token operator">=</span> processInstance<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        判断是否为暂停</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>suspended<span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//         如果是暂停，可以执行激活操作 ,参数：流程定义id</span>
+            runtimeService<span class="token punctuation">.</span><span class="token function">activateProcessInstanceById</span><span class="token punctuation">(</span>processDefinitionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程定义："</span><span class="token operator">+</span>processDefinitionId<span class="token operator">+</span><span class="token string">",已激活"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span><span class="token punctuation">{</span>
+<span class="token comment">//          如果是激活状态，可以暂停，参数：流程定义id</span>
+            runtimeService<span class="token punctuation">.</span><span class="token function">suspendProcessInstanceById</span><span class="token punctuation">(</span> processDefinitionId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程定义："</span><span class="token operator">+</span>processDefinitionId<span class="token operator">+</span><span class="token string">",已挂起"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">/**
+     * 测试完成个人任务
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        获取引擎</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取操作任务的服务 TaskService</span>
+        <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        完成任务,参数：流程实例id,完成zhangsan的任务</span>
+        <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">processInstanceId</span><span class="token punctuation">(</span><span class="token string">"15001"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span><span class="token string">"rose"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例id="</span><span class="token operator">+</span>task<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务Id="</span><span class="token operator">+</span>task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务负责人="</span><span class="token operator">+</span>task<span class="token punctuation">.</span><span class="token function">getAssignee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务名称="</span><span class="token operator">+</span>task<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        taskService<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="二、个人任务"><a href="#二、个人任务" class="headerlink" title="二、个人任务"></a>二、个人任务</h2><h3 id="2-1、分配任务负责人"><a href="#2-1、分配任务负责人" class="headerlink" title="2.1、分配任务负责人"></a>2.1、分配任务负责人</h3><h4 id="2-1-1、固定分配"><a href="#2-1-1、固定分配" class="headerlink" title="2.1.1、固定分配"></a>2.1.1、固定分配</h4><p>在进行业务流程建模时指定固定的任务负责人， 如图：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1575121491752.png" alt="1575121491752"></p>
+<p>并在 properties 视图中，填写 Assignee 项为任务负责人。 </p>
+<h4 id="2-1-2、表达式分配"><a href="#2-1-2、表达式分配" class="headerlink" title="2.1.2、表达式分配"></a>2.1.2、表达式分配</h4><p>由于固定分配方式，任务只管一步一步执行任务，执行到每一个任务将按照 bpmn 的配置去分配任<br>务负责人。 </p>
+<h5 id="2-1-2-1、UEL-表达式"><a href="#2-1-2-1、UEL-表达式" class="headerlink" title="2.1.2.1、UEL 表达式"></a>2.1.2.1、UEL 表达式</h5><p>Activiti 使用 UEL 表达式， UEL 是 java EE6 规范的一部分， UEL（Unified Expression Language）即 统一表达式语言， activiti 支持两个 UEL 表达式： UEL-value 和 UEL-method。 </p>
+<h6 id="1）UEL-value-定义"><a href="#1）UEL-value-定义" class="headerlink" title="1）UEL-value 定义"></a>1）UEL-value 定义</h6><p>如图： </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577503716131.png" alt="1577503716131"></p>
+<p>assignee 这个变量是 activiti 的一个流程变量，</p>
+<p>或者使用这种方式定义：</p>
+<p>如图：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577503804336.png" alt="1577503804336"></p>
+<p> user 也是 activiti 的一个流程变量， user.assignee 表示通过调用 user 的 getter 方法获取值。 </p>
+<h6 id="2）UEL-method-方式"><a href="#2）UEL-method-方式" class="headerlink" title="2）UEL-method 方式"></a>2）UEL-method 方式</h6><p>如图： </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1585972081.png"></p>
+<p>userBean 是 spring 容器中的一个 bean，表示调用该 bean 的 getUserId()方法。 </p>
+<h6 id="3）UEL-method-与-UEL-value-结合"><a href="#3）UEL-method-与-UEL-value-结合" class="headerlink" title="3）UEL-method 与 UEL-value 结合"></a>3）UEL-method 与 UEL-value 结合</h6><p>再比如：<br>${ldapService.findManagerForEmployee(emp)}<br>ldapService 是 spring 容器的一个 bean，findManagerForEmployee 是该 bean 的一个方法，emp 是 activiti<br>流程变量， emp 作为参数传到 ldapService.findManagerForEmployee 方法中。 </p>
+<h6 id="4）其它"><a href="#4）其它" class="headerlink" title="4）其它"></a>4）其它</h6><p>表达式支持解析基础类型、 bean、 list、 array 和 map，也可作为条件判断。<br>如下：<br>${order.price &gt; 100 &amp;&amp; order.price &lt; 250} </p>
+<h5 id="2-1-2-2、编写代码配置负责人"><a href="#2-1-2-2、编写代码配置负责人" class="headerlink" title="2.1.2.2、编写代码配置负责人"></a>2.1.2.2、编写代码配置负责人</h5><h6 id="1-定义任务分配流程变量"><a href="#1-定义任务分配流程变量" class="headerlink" title="1)定义任务分配流程变量"></a>1)定义任务分配流程变量</h6><p>如图：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577503716131.png" alt="1577503716131"></p>
+<h6 id="2-设置流程变量"><a href="#2-设置流程变量" class="headerlink" title="2)设置流程变量"></a>2)设置流程变量</h6><p>在启动流程实例时设置流程变量，如下： </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token comment">/**
+     * 设置流程负责人
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">assigneeUEL</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//      获取流程引擎</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取 RuntimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        设置assignee的取值，用户可以在界面上设置流程的执行</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span><span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span> assigneeMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        assigneeMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee0"</span><span class="token punctuation">,</span><span class="token string">"张三"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        assigneeMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee1"</span><span class="token punctuation">,</span><span class="token string">"李经理"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        assigneeMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee2"</span><span class="token punctuation">,</span><span class="token string">"王总经理"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        assigneeMap<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee3"</span><span class="token punctuation">,</span><span class="token string">"赵财务"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        启动流程实例，同时还要设置流程定义的assignee的值</span>
+        runtimeService<span class="token punctuation">.</span><span class="token function">startProcessInstanceByKey</span><span class="token punctuation">(</span><span class="token string">"myEvection1"</span><span class="token punctuation">,</span>assigneeMap<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//       输出</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>processEngine<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>执行成功后，可以在act_ru_variable表中看到刚才map中的数据</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1585562066-1585562152652.png"></p>
+<h5 id="2-1-2-3、注意事项"><a href="#2-1-2-3、注意事项" class="headerlink" title="2.1.2.3、注意事项"></a>2.1.2.3、注意事项</h5><p>由于使用了表达式分配，必须保证在任务执行过程表达式执行成功，比如：<br>某个任务使用了表达式${order.price &gt; 100 &amp;&amp; order.price &lt; 250}，当执行该任务时必须保证 order 在<br>流程变量中存在，否则 activiti 异常。 </p>
+<h4 id="2-1-3、监听器分配"><a href="#2-1-3、监听器分配" class="headerlink" title="2.1.3、监听器分配"></a>2.1.3、监听器分配</h4><p>可以使用监听器来完成很多Activiti流程的业务。</p>
+<p>在本章我们使用监听器的方式来指定负责人，那么在流程设计时就不需要指定assignee。</p>
+<p>任务监听器是发生对应的任务相关事件时执行自定义 java 逻辑 或表达式。<br>任务相当事件包括：  </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577506842889.png" alt="1577506842889"></p>
+<p>Event的选项包含：</p>
+<pre class="line-numbers language-none"><code class="language-none">Create：任务创建后触发
+Assignment：任务分配后触发
+Delete：任务完成后触发
+All：所有事件发生都触发<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>定义任务监听类，且类必须实现 org.activiti.engine.delegate.TaskListener 接口 </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MyTaskListener</span> <span class="token keyword">implements</span> <span class="token class-name">TaskListener</span> <span class="token punctuation">{</span>
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">notify</span><span class="token punctuation">(</span><span class="token class-name">DelegateTask</span> delegateTask<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>delegateTask<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"创建出差申请"</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span>
+                delegateTask<span class="token punctuation">.</span><span class="token function">getEventName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span><span class="token string">"create"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//这里指定任务负责人</span>
+            delegateTask<span class="token punctuation">.</span><span class="token function">setAssignee</span><span class="token punctuation">(</span><span class="token string">"张三"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>DelegateTask对象的内容如下：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1585561653.png"></p>
+<h5 id="2-1-3-1、注意事项"><a href="#2-1-3-1、注意事项" class="headerlink" title="2.1.3.1、注意事项"></a>2.1.3.1、注意事项</h5><p>使用监听器分配方式，按照监听事件去执行监听类的 notify 方法，方法如果不能正常执行也会影响<br>任务的执行。 </p>
+<h3 id="2-2、查询任务"><a href="#2-2、查询任务" class="headerlink" title="2.2、查询任务"></a>2.2、查询任务</h3><h4 id="查询任务负责人的待办任务"><a href="#查询任务负责人的待办任务" class="headerlink" title="查询任务负责人的待办任务"></a>查询任务负责人的待办任务</h4><p>代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 查询当前个人待执行的任务</span>
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">findPersonalTaskList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 流程定义key</span>
+    <span class="token class-name">String</span> processDefinitionKey <span class="token operator">=</span> <span class="token string">"myEvection1"</span><span class="token punctuation">;</span>
+    <span class="token comment">// 任务负责人</span>
+    <span class="token class-name">String</span> assignee <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
+    <span class="token comment">// 获取TaskService</span>
+    <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Task</span><span class="token punctuation">&gt;</span></span> taskList <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    	<span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>processDefinitionKey<span class="token punctuation">)</span>
+    	<span class="token punctuation">.</span><span class="token function">includeProcessVariables</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>assignee<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Task</span> task <span class="token operator">:</span> taskList<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例id： "</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务id： "</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务负责人： "</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getAssignee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务名称： "</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="关联-businessKey"><a href="#关联-businessKey" class="headerlink" title="关联 businessKey"></a>关联 businessKey</h4><p>需求：<br>在 activiti 实际应用时，查询待办任务可能要显示出业务系统的一些相关信息。</p>
+<p>比如：查询待审批出差任务列表需要将出差单的日期、 出差天数等信息显示出来。</p>
+<p>出差天数等信息在业务系统中存在，而并没有在 activiti 数据库中存在，所以是无法通过 activiti 的 api 查询到出差天数等信息。<br>实现：<br>在查询待办任务时，通过 businessKey（业务标识 ）关联查询业务系统的出差单表，查询出出差天数等信息。 </p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">findProcessInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取TaskService</span>
+        <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取RuntimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        查询流程定义的对象</span>
+        <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span><span class="token string">"myEvection1"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span><span class="token string">"张三"</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        使用task对象获取实例id</span>
+        <span class="token class-name">String</span> processInstanceId <span class="token operator">=</span> task<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//          使用实例id，获取流程实例对象</span>
+        <span class="token class-name">ProcessInstance</span> processInstance <span class="token operator">=</span> runtimeService<span class="token punctuation">.</span><span class="token function">createProcessInstanceQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">processInstanceId</span><span class="token punctuation">(</span>processInstanceId<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        使用processInstance，得到 businessKey</span>
+        <span class="token class-name">String</span> businessKey <span class="token operator">=</span> processInstance<span class="token punctuation">.</span><span class="token function">getBusinessKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"businessKey=="</span><span class="token operator">+</span>businessKey<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h3 id="2-3、办理任务"><a href="#2-3、办理任务" class="headerlink" title="2.3、办理任务"></a>2.3、办理任务</h3><p>注意：在实际应用中，完成任务前需要校验任务的负责人是否具有该任务的办理权限 。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/**
+     * 完成任务，判断当前用户是否有权限
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//任务id</span>
+        <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"15005"</span><span class="token punctuation">;</span>
+<span class="token comment">//        任务负责人</span>
+        <span class="token class-name">String</span> assingee <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
+        <span class="token comment">//获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 创建TaskService</span>
+        <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        完成任务前，需要校验该负责人可以完成当前任务</span>
+<span class="token comment">//        校验方法：</span>
+<span class="token comment">//        根据任务id和任务负责人查询当前任务，如果查到该用户有权限，就完成</span>
+        <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskId</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>assingee<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            taskService<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"完成任务"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h2 id="三、流程变量"><a href="#三、流程变量" class="headerlink" title="三、流程变量"></a>三、流程变量</h2><h3 id="3-1、什么是流程变量"><a href="#3-1、什么是流程变量" class="headerlink" title="3.1、什么是流程变量"></a>3.1、什么是流程变量</h3><p>流程变量在 activiti 中是一个非常重要的角色，流程运转有时需要靠流程变量，业务系统和 activiti<br>结合时少不了流程变量，流程变量就是 activiti 在管理工作流时根据管理需要而设置的变量。<br>比如：在出差申请流程流转时如果出差天数大于 3 天则由总经理审核，否则由人事直接审核， 出差天<br>数就可以设置为流程变量，在流程流转时使用。 </p>
+<p><strong>注意：虽然流程变量中可以存储业务数据可以通过activiti的api查询流程变量从而实现 查询业务数据，但是不建议这样使用，因为业务数据查询由业务系统负责，activiti设置流程变量是为了流程执行需要而创建。</strong></p>
+<h3 id="3-2、流程变量类型"><a href="#3-2、流程变量类型" class="headerlink" title="3.2、流程变量类型"></a>3.2、流程变量类型</h3><p>如果将 pojo 存储到流程变量中，必须实现序列化接口 serializable，为了防止由于新增字段无<br>法反序列化，需要生成 serialVersionUID。 </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/20190731150933695.png"></p>
+<h3 id="3-3、流程变量作用域"><a href="#3-3、流程变量作用域" class="headerlink" title="3.3、流程变量作用域"></a>3.3、流程变量作用域</h3><p>流程变量的作用域可以是一个流程实例(processInstance)，或一个任务(task)，或一个执行实例<br>(execution)</p>
+<h4 id="3-3-1、globa变量"><a href="#3-3-1、globa变量" class="headerlink" title="3.3.1、globa变量"></a>3.3.1、globa变量</h4><p>流程变量的默认作用域是流程实例。当一个流程变量的作用域为流程实例时，可以称为 global 变量</p>
+<p>注意：</p>
+<p>如：    Global变量：userId（变量名）、zhangsan（变量值）</p>
+<p>global 变量中变量名不允许重复，设置相同名称的变量，后设置的值会覆盖前设置的变量值。</p>
+<h4 id="3-3-2、local变量"><a href="#3-3-2、local变量" class="headerlink" title="3.3.2、local变量"></a>3.3.2、local变量</h4><p>任务和执行实例仅仅是针对一个任务和一个执行实例范围，范围没有流程实例大， 称为 local 变量。</p>
+<p>Local 变量由于在不同的任务或不同的执行实例中，作用域互不影响，变量名可以相同没有影响。Local 变量名也可以和 global 变量名相同，没有影响。 </p>
+<h3 id="3-4、流程变量的使用方法"><a href="#3-4、流程变量的使用方法" class="headerlink" title="3.4、流程变量的使用方法"></a>3.4、流程变量的使用方法</h3><h4 id="3-4-1、在属性上使用UEL表达式"><a href="#3-4-1、在属性上使用UEL表达式" class="headerlink" title="3.4.1、在属性上使用UEL表达式"></a>3.4.1、在属性上使用UEL表达式</h4><p>可以在 assignee 处设置 UEL 表达式，表达式的值为任务的负责人，比如： ${assignee}， assignee 就是一个流程变量名称。</p>
+<p>Activiti获取UEL表达式的值，即流程变量assignee的值 ，将assignee的值作为任务的负责人进行任务分配</p>
+<h4 id="3-4-2、在连线上使用UEL表达式"><a href="#3-4-2、在连线上使用UEL表达式" class="headerlink" title="3.4.2、在连线上使用UEL表达式"></a>3.4.2、在连线上使用UEL表达式</h4><p>可以在连线上设置UEL表达式，决定流程走向。</p>
+<p>比如：${price&lt;10000} 。price就是一个流程变量名称，uel表达式结果类型为布尔类型。</p>
+<p>如果UEL表达式是true，要决定 流程执行走向。</p>
+<h3 id="3-5、使用Global变量控制流程"><a href="#3-5、使用Global变量控制流程" class="headerlink" title="3.5、使用Global变量控制流程"></a>3.5、使用Global变量控制流程</h3><h4 id="3-5-1、需求"><a href="#3-5-1、需求" class="headerlink" title="3.5.1、需求"></a>3.5.1、需求</h4><p>员工创建出差申请单，由部门经理审核，部门经理审核通过后出差3天及以下由人财务直接审批，3天以上先由总经理审核，总经理审核通过再由财务审批。</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577847570736.png" alt="1577847570736"></p>
+<h4 id="3-5-2、流程定义"><a href="#3-5-2、流程定义" class="headerlink" title="3.5.2、流程定义"></a>3.5.2、流程定义</h4><p>1）、出差天数大于等于3连线条件</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577847654279.png" alt="1577847654279"><img src="/2023/03/07/activiti-jin-jie/assets/1577847695723.png" alt="1577847695723"></p>
+<p>也可以使用对象参数命名，如evection.num：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577870487533.png" alt="1577870487533"><img src="/2023/03/07/activiti-jin-jie/assets/1577870510159.png" alt="1577870510159"></p>
+<p>2）、出差天数小于3连线条件</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577847740055.png" alt="1577847740055"><img src="/2023/03/07/activiti-jin-jie/assets/1577847766231.png" alt="1577847766231"></p>
+<p>也可以使用对象参数命名，如：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577870638264.png" alt="1577870638264"><img src="/2023/03/07/activiti-jin-jie/assets/1577870654033.png" alt="1577870654033"></p>
+<h4 id="3-5-3、设置global流程变量"><a href="#3-5-3、设置global流程变量" class="headerlink" title="3.5.3、设置global流程变量"></a>3.5.3、设置global流程变量</h4><p>在部门经理审核前设置流程变量，变量值为出差单信息（包括出差天数），部门经理审核后可以根据流程变量的值决定流程走向。</p>
+<p>在设置流程变量时，可以在启动流程时设置，也可以在任务办理时设置</p>
+<h5 id="3-5-3-1、创建POJO对象"><a href="#3-5-3-1、创建POJO对象" class="headerlink" title="3.5.3.1、创建POJO对象"></a>3.5.3.1、创建POJO对象</h5><p>创建出差申请pojo对象</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token keyword">package</span> <span class="token namespace">com<span class="token punctuation">.</span>itheima<span class="token punctuation">.</span>demo<span class="token punctuation">.</span>pojo</span><span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>io<span class="token punctuation">.</span></span><span class="token class-name">Serializable</span></span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token import"><span class="token namespace">java<span class="token punctuation">.</span>util<span class="token punctuation">.</span></span><span class="token class-name">Date</span></span><span class="token punctuation">;</span>
+
+<span class="token comment">/**
+ * 出差申请 pojo
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Evection</span> <span class="token keyword">implements</span> <span class="token class-name">Serializable</span> <span class="token punctuation">{</span>
+    <span class="token comment">/**
+     * 主键id
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">Long</span> id<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 出差申请单名称
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> evectionName<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 出差天数
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">Double</span> num<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 预计开始时间
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">Date</span> beginDate<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 预计结束时间
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">Date</span> endDate<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 目的地
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> destination<span class="token punctuation">;</span>
+    <span class="token comment">/**
+     * 出差事由
+     */</span>
+    <span class="token keyword">private</span> <span class="token class-name">String</span> reson<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Long</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span><span class="token class-name">Long</span> id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getEvectionName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> evectionName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEvectionName</span><span class="token punctuation">(</span><span class="token class-name">String</span> evectionName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>evectionName <span class="token operator">=</span> evectionName<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Date</span> <span class="token function">getBeginDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> beginDate<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setBeginDate</span><span class="token punctuation">(</span><span class="token class-name">Date</span> beginDate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>beginDate <span class="token operator">=</span> beginDate<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Date</span> <span class="token function">getEndDate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> endDate<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setEndDate</span><span class="token punctuation">(</span><span class="token class-name">Date</span> endDate<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>endDate <span class="token operator">=</span> endDate<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getDestination</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> destination<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setDestination</span><span class="token punctuation">(</span><span class="token class-name">String</span> destination<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>destination <span class="token operator">=</span> destination<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">getReson</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> reson<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setReson</span><span class="token punctuation">(</span><span class="token class-name">String</span> reson<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>reson <span class="token operator">=</span> reson<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">Double</span> <span class="token function">getNum</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> num<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setNum</span><span class="token punctuation">(</span><span class="token class-name">Double</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>num <span class="token operator">=</span> num<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="3-5-3-2、启动流程时设置变量"><a href="#3-5-3-2、启动流程时设置变量" class="headerlink" title="3.5.3.2、启动流程时设置变量"></a>3.5.3.2、启动流程时设置变量</h5><p>在启动流程时设置流程变量，变量的作用域是整个流程实例。</p>
+<p>通过Map&lt;key,value&gt;设置流程变量，map中可以设置多个变量，这个key就是流程变量的名字。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token comment">/**
+     * 启动流程实例,设置流程变量的值
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">startProcess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//        获取流程引擎</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取RunTimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        流程定义key</span>
+        <span class="token class-name">String</span> key <span class="token operator">=</span> <span class="token string">"myEvection2"</span><span class="token punctuation">;</span>
+<span class="token comment">//       创建变量集合</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        创建出差pojo对象</span>
+        <span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        设置出差天数</span>
+        evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">2d</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      定义流程变量，把出差pojo对象放入map</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"evection"</span><span class="token punctuation">,</span>evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      设置assignee的取值，用户可以在界面上设置流程的执行</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee0"</span><span class="token punctuation">,</span><span class="token string">"张三"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee1"</span><span class="token punctuation">,</span><span class="token string">"李经理"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee2"</span><span class="token punctuation">,</span><span class="token string">"王总经理"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"assignee3"</span><span class="token punctuation">,</span><span class="token string">"赵财务"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        启动流程实例，并设置流程变量的值（把map传入）</span>
+        <span class="token class-name">ProcessInstance</span> processInstance <span class="token operator">=</span> runtimeService
+                <span class="token punctuation">.</span><span class="token function">startProcessInstanceByKey</span><span class="token punctuation">(</span>key<span class="token punctuation">,</span> map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      输出</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例名称="</span><span class="token operator">+</span>processInstance<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程定义id=="</span><span class="token operator">+</span>processInstance<span class="token punctuation">.</span><span class="token function">getProcessDefinitionId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+    <span class="token comment">/**
+     * 完成任务，判断当前用户是否有权限
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//任务id</span>
+        <span class="token class-name">String</span> key <span class="token operator">=</span> <span class="token string">"myEvection2"</span><span class="token punctuation">;</span>
+<span class="token comment">//        任务负责人</span>
+        <span class="token class-name">String</span> assingee <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
+        <span class="token comment">//获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 创建TaskService</span>
+        <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        完成任务前，需要校验该负责人可以完成当前任务</span>
+<span class="token comment">//        校验方法：</span>
+<span class="token comment">//        根据任务id和任务负责人查询当前任务，如果查到该用户有权限，就完成</span>
+        <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>assingee<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            taskService<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务执行完成"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>说明：</p>
+<p>startProcessInstanceByKey(processDefinitionKey, variables)</p>
+<p>流程变量作用域是一个流程实例，流程变量使用Map存储，同一个流程实例设置变量map中key相同，后者覆盖前者。</p>
+<h5 id="3-5-3-2、任务办理时设置变量"><a href="#3-5-3-2、任务办理时设置变量" class="headerlink" title="3.5.3.2、任务办理时设置变量"></a>3.5.3.2、任务办理时设置变量</h5><p>在完成任务时设置流程变量，该流程变量只有在该任务完成后其它结点才可使用该变量，它的作用域是整个流程实例，如果设置的流程变量的key在流程实例中已存在相同的名字则后设置的变量替换前边设置的变量。</p>
+<p>这里需要在创建出差单任务完成时设置流程变量</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token comment">/**
+     * 完成任务，判断当前用户是否有权限
+     */</span>
+    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//任务id</span>
+        <span class="token class-name">String</span> key <span class="token operator">=</span> <span class="token string">"myEvection2"</span><span class="token punctuation">;</span>
+<span class="token comment">//        任务负责人</span>
+        <span class="token class-name">String</span> assingee <span class="token operator">=</span> <span class="token string">"张三"</span><span class="token punctuation">;</span>
+<span class="token comment">//       获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//       创建TaskService</span>
+        <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//       创建变量集合</span>
+        <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        创建出差pojo对象</span>
+        <span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        设置出差天数</span>
+        evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">2d</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      定义流程变量</span>
+        map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"evection"</span><span class="token punctuation">,</span>evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        完成任务前，需要校验该负责人可以完成当前任务</span>
+<span class="token comment">//        校验方法：</span>
+<span class="token comment">//        根据任务id和任务负责人查询当前任务，如果查到该用户有权限，就完成</span>
+        <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>key<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>assingee<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token comment">//完成任务是，设置流程变量的值</span>
+            taskService<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>map<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务执行完成"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>说明：</p>
+<p>通过当前任务设置流程变量，需要指定当前任务id，如果当前执行的任务id不存在则抛出异常。</p>
+<p>任务办理时也是通过map&lt;key,value&gt;设置流程变量，一次可以设置多个变量。</p>
+<h5 id="3-5-3-3、通过当前流程实例设置"><a href="#3-5-3-3、通过当前流程实例设置" class="headerlink" title="3.5.3.3、通过当前流程实例设置"></a>3.5.3.3、通过当前流程实例设置</h5><p>通过流程实例id设置全局变量，该流程实例必须未执行完成。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java">    <span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setGlobalVariableByExecutionId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//    当前流程实例执行 id，通常设置为当前执行的流程实例</span>
+        <span class="token class-name">String</span> executionId<span class="token operator">=</span><span class="token string">"2601"</span><span class="token punctuation">;</span>
+<span class="token comment">//     获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        获取RuntimeService</span>
+        <span class="token class-name">RuntimeService</span> runtimeService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getRuntimeService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        创建出差pojo对象</span>
+        <span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        设置天数</span>
+        evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">3d</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      通过流程实例 id设置流程变量</span>
+        runtimeService<span class="token punctuation">.</span><span class="token function">setVariable</span><span class="token punctuation">(</span>executionId<span class="token punctuation">,</span> <span class="token string">"evection"</span><span class="token punctuation">,</span> evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//      一次设置多个值</span>
+<span class="token comment">//      runtimeService.setVariables(executionId, variables)</span>
+    <span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意：</p>
+<p>executionId必须当前未结束 流程实例的执行id，通常此id设置流程实例 的id。也可以通runtimeService.getVariable()获取流程变量。</p>
+<h5 id="3-5-3-4、通过当前任务设置"><a href="#3-5-3-4、通过当前任务设置" class="headerlink" title="3.5.3.4、通过当前任务设置"></a>3.5.3.4、通过当前任务设置</h5><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+	<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setGlobalVariableByTaskId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+		
+		<span class="token comment">//当前待办任务id</span>
+		<span class="token class-name">String</span> taskId<span class="token operator">=</span><span class="token string">"1404"</span><span class="token punctuation">;</span>
+<span class="token comment">//     获取processEngine</span>
+        <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//通过任务设置流程变量</span>
+		taskService<span class="token punctuation">.</span><span class="token function">setVariable</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> <span class="token string">"evection"</span><span class="token punctuation">,</span> evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		<span class="token comment">//一次设置多个值 </span>
+		<span class="token comment">//taskService.setVariables(taskId, variables)</span>
+	<span class="token punctuation">}</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意：</p>
+<p>任务id必须是当前待办任务id，act_ru_task中存在。如果该任务已结束，会报错</p>
+<p>也可以通过taskService.getVariable()获取流程变量。</p>
+<h4 id="3-5-4、测试"><a href="#3-5-4、测试" class="headerlink" title="3.5.4、测试"></a>3.5.4、测试</h4><p>正常测试：</p>
+<p>​       设置流程变量的值大于等于3天</p>
+<p>​       设计流程变量的值小于3天</p>
+<p>异常测试：</p>
+<p>​       流程变量不存在</p>
+<p>​       流程变量的值为空NULL，price属性为空</p>
+<p>​       UEL表达式都不符合条件  </p>
+<p>​      不设置连线的条件</p>
+<h4 id="3-5-5、注意事项"><a href="#3-5-5、注意事项" class="headerlink" title="3.5.5、注意事项"></a>3.5.5、注意事项</h4><p>1、  如果UEL表达式中流程变量名不存在则报错。</p>
+<p>2、  如果UEL表达式中流程变量值为空NULL，流程不按UEL表达式去执行，而流程结束 。</p>
+<p>3、  如果UEL表达式都不符合条件，流程结束 </p>
+<p>4、  如果连线不设置条件，会走flow序号小的那条线</p>
+<h4 id="3-5-6、操作数据库表"><a href="#3-5-6、操作数据库表" class="headerlink" title="3.5.6、操作数据库表"></a>3.5.6、操作数据库表</h4><p>设置流程变量会在当前执行流程变量表插入记录，同时也会在历史流程变量表也插入记录。</p>
+ <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment">//当前流程变量表</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> act_ru_variable <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>记录当前运行流程实例可使用的流程变量，包括 global和local变量</p>
+<p>Id_：主键</p>
+<p>Type_：变量类型</p>
+<p>Name_：变量名称 </p>
+<p>Execution_id_：所属流程实例执行id，global和local变量都存储</p>
+<p>Proc_inst_id_：所属流程实例id，global和local变量都存储 </p>
+<p>Task_id_：所属任务id，local变量存储</p>
+<p>Bytearray_：serializable类型变量存储对应act_ge_bytearray表的id</p>
+<p>Double_：double类型变量值</p>
+<p>Long_：long类型变量值</p>
+<p>Text_：text类型变量值 </p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"> <span class="token comment">#历史流程变量表</span>
+<span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> act_hi_varinst <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>记录所有已创建的流程变量，包括 global和local变量</p>
+<p>字段意义参考当前流程变量表。</p>
+<h3 id="3-6、设置local流程变量"><a href="#3-6、设置local流程变量" class="headerlink" title="3.6、设置local流程变量"></a>3.6、设置local流程变量</h3><h4 id="3-6-1、任务办理时设置"><a href="#3-6-1、任务办理时设置" class="headerlink" title="3.6.1、任务办理时设置"></a>3.6.1、任务办理时设置</h4><p> 任务办理时设置local流程变量，当前运行的流程实例只能在该任务结束前使用，任务结束该变量无法在当前流程实例使用，可以通过查询历史任务查询。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/*
+*处理任务时设置local流程变量
+*/</span>
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+   <span class="token comment">//任务id</span>
+   <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"1404"</span><span class="token punctuation">;</span>
+<span class="token comment">//  获取processEngine</span>
+    <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  定义流程变量</span>
+   <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span> variables <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">3d</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 定义流程变量</span>
+   <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span> variables <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">Object</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  变量名是holiday，变量值是holiday对象</span>
+    variables<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">"evection"</span><span class="token punctuation">,</span> evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  设置local变量，作用域为该任务</span>
+    taskService<span class="token punctuation">.</span><span class="token function">setVariablesLocal</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> variables<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  完成任务</span>
+   taskService<span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>​       说明：</p>
+<p>设置作用域为任务的local变量，每个任务可以设置同名的变量，互不影响。</p>
+<h4 id="3-6-2、通过当前任务设置"><a href="#3-6-2、通过当前任务设置" class="headerlink" title="3.6.2、通过当前任务设置"></a>3.6.2、通过当前任务设置</h4><pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setLocalVariableByTaskId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//   当前待办任务id</span>
+    <span class="token class-name">String</span> taskId<span class="token operator">=</span><span class="token string">"1404"</span><span class="token punctuation">;</span>
+<span class="token comment">//  获取processEngine</span>
+    <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">Evection</span> evection <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Evection</span> <span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    evection<span class="token punctuation">.</span><span class="token function">setNum</span><span class="token punctuation">(</span><span class="token number">3d</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  通过任务设置流程变量</span>
+    taskService<span class="token punctuation">.</span><span class="token function">setVariableLocal</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> <span class="token string">"evection"</span><span class="token punctuation">,</span> evection<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//  一次设置多个值 </span>
+    <span class="token comment">//taskService.setVariablesLocal(taskId, variables)</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意：</p>
+<p>任务id必须是当前待办任务id，act_ru_task中存在。</p>
+<h4 id="3-6-3、-Local变量测试1"><a href="#3-6-3、-Local变量测试1" class="headerlink" title="3.6.3、  Local变量测试1"></a>3.6.3、  Local变量测试1</h4><p>如果上边例子中设置global变量改为设置local变量是否可行？为什么？</p>
+<p> Local变量在任务结束后无法在当前流程实例执行中使用，如果后续的流程执行需要用到此变量则会报错。</p>
+<h4 id="3-6-4、-Local变量测试2"><a href="#3-6-4、-Local变量测试2" class="headerlink" title="3.6.4、  Local变量测试2"></a>3.6.4、  Local变量测试2</h4><p>在部门经理审核、总经理审核、财务审核时设置local变量，可通过historyService查询每个历史任务时将流程变量的值也查询出来。</p>
+<p> 代码如下：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 创建历史任务查询对象</span>
+      <span class="token class-name">HistoricTaskInstanceQuery</span> historicTaskInstanceQuery <span class="token operator">=</span> historyService<span class="token punctuation">.</span><span class="token function">createHistoricTaskInstanceQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token comment">// 查询结果包括 local变量</span>
+      historicTaskInstanceQuery<span class="token punctuation">.</span><span class="token function">includeTaskLocalVariables</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">HistoricTaskInstance</span> historicTaskInstance <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"=============================="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务id："</span> <span class="token operator">+</span> historicTaskInstance<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务名称："</span> <span class="token operator">+</span> historicTaskInstance<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+         <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务负责人："</span> <span class="token operator">+</span> historicTaskInstance<span class="token punctuation">.</span><span class="token function">getAssignee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+     <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务local变量："</span><span class="token operator">+</span> historicTaskInstance<span class="token punctuation">.</span><span class="token function">getTaskLocalVariables</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>注意：查询历史流程变量，特别是查询pojo变量需要经过反序列化，不推荐使用。</p>
+<h2 id="四、组任务"><a href="#四、组任务" class="headerlink" title="四、组任务"></a>四、组任务</h2><h3 id="4-1、需求"><a href="#4-1、需求" class="headerlink" title="4.1、需求"></a>4.1、需求</h3><p>在流程定义中在任务结点的 assignee 固定设置任务负责人，在流程定义时将参与者固定设置在.bpmn 文件中，如果临时任务负责人变更则需要修改流程定义，系统可扩展性差。</p>
+<p>针对这种情况可以给任务设置多个候选人，可以从候选人中选择参与者来完成任务。 </p>
+<h3 id="4-2、设置任务候选人"><a href="#4-2、设置任务候选人" class="headerlink" title="4.2、设置任务候选人"></a>4.2、设置任务候选人</h3><p>在流程图中任务节点的配置中设置 candidate-users(候选人)，多个候选人之间用逗号分开。 </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577878753288.png" alt="1577878753288"></p>
+<p>查看bpmn文件</p>
+<pre class="line-numbers language-markup" data-language="markup"><code class="language-markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>userTask</span> <span class="token attr-name"><span class="token namespace">activiti:</span>candidateUsers</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>lisi,wangwu<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">activiti:</span>exclusive</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>true<span class="token punctuation">"</span></span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>_3<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>经理审批<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>我们可以看到部门经理的审核人已经设置为 lisi,wangwu 这样的一组候选人，可以使用</p>
+<p>activiti:candiateUsers=”用户 1,用户 2,用户 3”的这种方式来实现设置一组候选人 </p>
+<h3 id="4-3、组任务"><a href="#4-3、组任务" class="headerlink" title="4.3、组任务"></a>4.3、组任务</h3><h4 id="4-3-1、组任务办理流程"><a href="#4-3-1、组任务办理流程" class="headerlink" title="4.3.1、组任务办理流程"></a>4.3.1、组任务办理流程</h4><h5 id="a、查询组任务"><a href="#a、查询组任务" class="headerlink" title="a、查询组任务"></a>a、查询组任务</h5><p>指定候选人，查询该候选人当前的待办任务。</p>
+<p>候选人不能立即办理任务。</p>
+<h5 id="b、拾取-claim-任务"><a href="#b、拾取-claim-任务" class="headerlink" title="b、拾取(claim)任务"></a>b、拾取(claim)任务</h5><p>该组任务的所有候选人都能拾取。</p>
+<p>将候选人的组任务，变成个人任务。原来候选人就变成了该任务的负责人。</p>
+<p>如果拾取后不想办理该任务？</p>
+<p>   需要将已经拾取的个人任务归还到组里边，将个人任务变成了组任务。</p>
+<h5 id="c、查询个人任务"><a href="#c、查询个人任务" class="headerlink" title="c、查询个人任务"></a>c、查询个人任务</h5><p>查询方式同个人任务部分，根据assignee查询用户负责的个人任务。</p>
+<h5 id="d、办理个人任务"><a href="#d、办理个人任务" class="headerlink" title="d、办理个人任务"></a>d、办理个人任务</h5><h4 id="4-3-2、-查询组任务"><a href="#4-3-2、-查询组任务" class="headerlink" title="4.3.2、  查询组任务"></a>4.3.2、  查询组任务</h4><p> 根据候选人查询组任务</p>
+ <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">findGroupTaskList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">// 流程定义key</span>
+       <span class="token class-name">String</span> processDefinitionKey <span class="token operator">=</span> <span class="token string">"evection3"</span><span class="token punctuation">;</span>
+       <span class="token comment">// 任务候选人</span>
+       <span class="token class-name">String</span> candidateUser <span class="token operator">=</span> <span class="token string">"lisi"</span><span class="token punctuation">;</span>
+        <span class="token comment">//  获取processEngine</span>
+       <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 创建TaskService</span>
+       <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">//查询组任务</span>
+       <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Task</span><span class="token punctuation">&gt;</span></span> list <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+              <span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>processDefinitionKey<span class="token punctuation">)</span>
+              <span class="token punctuation">.</span><span class="token function">taskCandidateUser</span><span class="token punctuation">(</span>candidateUser<span class="token punctuation">)</span><span class="token comment">//根据候选人查询</span>
+              <span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Task</span> task <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例id："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务id："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务负责人："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getAssignee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务名称："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="4-3-3-、-拾取组任务"><a href="#4-3-3-、-拾取组任务" class="headerlink" title="4.3.3 、 拾取组任务"></a>4.3.3 、 拾取组任务</h4><p> 候选人员拾取组任务后该任务变为自己的个人任务。</p>
+ <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">claimTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token comment">//  获取processEngine</span>
+       <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">//要拾取的任务id</span>
+       <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"6302"</span><span class="token punctuation">;</span>
+       <span class="token comment">//任务候选人id</span>
+       <span class="token class-name">String</span> userId <span class="token operator">=</span> <span class="token string">"lisi"</span><span class="token punctuation">;</span>
+       <span class="token comment">//拾取任务</span>
+       <span class="token comment">//即使该用户不是候选人也能拾取(建议拾取时校验是否有资格)    </span>
+       <span class="token comment">//校验该用户有没有拾取任务的资格</span>
+       <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+              <span class="token punctuation">.</span><span class="token function">taskId</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span>
+              <span class="token punctuation">.</span><span class="token function">taskCandidateUser</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token comment">//根据候选人查询</span>
+              <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span><span class="token punctuation">(</span>task<span class="token operator">!=</span><span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+         <span class="token comment">//拾取任务</span>
+           taskService<span class="token punctuation">.</span><span class="token function">claim</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> userId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+           <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务拾取成功"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>说明：即使该用户不是候选人也能拾取，建议拾取时校验是否有资格</p>
+<p>组任务拾取后，该任务已有负责人，通过候选人将查询不到该任务</p>
+<h4 id="4-3-4、-查询个人待办任务"><a href="#4-3-4、-查询个人待办任务" class="headerlink" title="4.3.4、  查询个人待办任务"></a>4.3.4、  查询个人待办任务</h4><p> 查询方式同个人任务查询</p>
+ <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">findPersonalTaskList</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// 流程定义key</span>
+    <span class="token class-name">String</span> processDefinitionKey <span class="token operator">=</span> <span class="token string">"evection1"</span><span class="token punctuation">;</span>
+    <span class="token comment">// 任务负责人</span>
+    <span class="token class-name">String</span> assignee <span class="token operator">=</span> <span class="token string">"zhangsan"</span><span class="token punctuation">;</span>
+     <span class="token comment">//  获取processEngine</span>
+       <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 创建TaskService</span>
+    <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token class-name">List</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">Task</span><span class="token punctuation">&gt;</span></span> list <span class="token operator">=</span> taskService<span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">processDefinitionKey</span><span class="token punctuation">(</span>processDefinitionKey<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>assignee<span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name">Task</span> task <span class="token operator">:</span> list<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"----------------------------"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"流程实例id："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getProcessInstanceId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务id："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务负责人："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getAssignee</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"任务名称："</span> <span class="token operator">+</span> task<span class="token punctuation">.</span><span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="4-3-5、-办理个人任务"><a href="#4-3-5、-办理个人任务" class="headerlink" title="4.3.5、  办理个人任务"></a>4.3.5、  办理个人任务</h4><p>同个人任务办理</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"> <span class="token comment">/*完成任务*/</span>
+   <span class="token annotation punctuation">@Test</span>
+   <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">completeTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+<span class="token comment">//     任务ID</span>
+      <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"12304"</span><span class="token punctuation">;</span>
+<span class="token comment">//     获取processEngine</span>
+      <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+                   <span class="token punctuation">.</span><span class="token function">complete</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"完成任务："</span><span class="token operator">+</span>taskId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>说明：建议完成任务前校验该用户是否是该任务的负责人。</p>
+<h4 id="4-3-6、-归还组任务"><a href="#4-3-6、-归还组任务" class="headerlink" title="4.3.6、  归还组任务"></a>4.3.6、  归还组任务</h4><p> 如果个人不想办理该组任务，可以归还组任务，归还后该用户不再是该任务的负责人</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">/*
+*归还组任务，由个人任务变为组任务，还可以进行任务交接
+*/</span>
+<span class="token annotation punctuation">@Test</span>
+<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAssigneeToGroupTask</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//  获取processEngine</span>
+       <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// 查询任务使用TaskService</span>
+   <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token comment">// 当前待办任务</span>
+   <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"6004"</span><span class="token punctuation">;</span>
+   <span class="token comment">// 任务负责人</span>
+   <span class="token class-name">String</span> userId <span class="token operator">=</span> <span class="token string">"zhangsan2"</span><span class="token punctuation">;</span>
+    <span class="token comment">// 校验userId是否是taskId的负责人，如果是负责人才可以归还组任务</span>
+   <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService
+       <span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+       <span class="token punctuation">.</span><span class="token function">taskId</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span>
+       <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span>
+       <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+       <span class="token comment">// 如果设置为null，归还组任务,该 任务没有负责人</span>
+       taskService<span class="token punctuation">.</span><span class="token function">setAssignee</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> <span class="token keyword">null</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p> 说明：建议归还任务前校验该用户是否是该任务的负责人</p>
+<p>也可以通过setAssignee方法将任务委托给其它用户负责，注意被委托的用户可以不是候选人（建议不要这样使用）</p>
+<h4 id="4-3-7、-任务交接"><a href="#4-3-7、-任务交接" class="headerlink" title="4.3.7、  任务交接"></a>4.3.7、  任务交接</h4><p>任务交接,任务负责人将任务交给其它候选人办理该任务</p>
+ <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token annotation punctuation">@Test</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setAssigneeToCandidateUser</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//  获取processEngine</span>
+       <span class="token class-name">ProcessEngine</span> processEngine <span class="token operator">=</span> <span class="token class-name">ProcessEngines</span><span class="token punctuation">.</span><span class="token function">getDefaultProcessEngine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 查询任务使用TaskService</span>
+       <span class="token class-name">TaskService</span> taskService <span class="token operator">=</span> processEngine<span class="token punctuation">.</span><span class="token function">getTaskService</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token comment">// 当前待办任务</span>
+       <span class="token class-name">String</span> taskId <span class="token operator">=</span> <span class="token string">"6004"</span><span class="token punctuation">;</span>
+       <span class="token comment">// 任务负责人</span>
+       <span class="token class-name">String</span> userId <span class="token operator">=</span> <span class="token string">"zhangsan2"</span><span class="token punctuation">;</span>
+<span class="token comment">// 将此任务交给其它候选人办理该 任务</span>
+           <span class="token class-name">String</span> candidateuser <span class="token operator">=</span> <span class="token string">"zhangsan"</span><span class="token punctuation">;</span>
+       <span class="token comment">// 校验userId是否是taskId的负责人，如果是负责人才可以归还组任务</span>
+       <span class="token class-name">Task</span> task <span class="token operator">=</span> taskService
+           <span class="token punctuation">.</span><span class="token function">createTaskQuery</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+           <span class="token punctuation">.</span><span class="token function">taskId</span><span class="token punctuation">(</span>taskId<span class="token punctuation">)</span>
+           <span class="token punctuation">.</span><span class="token function">taskAssignee</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span>
+           <span class="token punctuation">.</span><span class="token function">singleResult</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token keyword">if</span> <span class="token punctuation">(</span>task <span class="token operator">!=</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+           taskService<span class="token punctuation">.</span><span class="token function">setAssignee</span><span class="token punctuation">(</span>taskId<span class="token punctuation">,</span> candidateuser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+       <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="4-3-8、-数据库表操作"><a href="#4-3-8、-数据库表操作" class="headerlink" title="4.3.8、  数据库表操作"></a>4.3.8、  数据库表操作</h4><p>查询当前任务执行表</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> act_ru_task <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>任务执行表，记录当前执行的任务，由于该任务当前是组任务，所有assignee为空，当拾取任务后该字段就是拾取用户的id</p>
+<p>查询任务参与者</p>
+<pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> act_ru_identitylink<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> 任务参与者，记录当前参考任务用户或组，当前任务如果设置了候选人，会向该表插入候选人记录，有几个候选就插入几个</p>
+<p>与act_ru_identitylink对应的还有一张历史表act_hi_identitylink，向act_ru_identitylink插入记录的同时也会向历史表插入记录。任务完成</p>
+<h2 id="五、网关"><a href="#五、网关" class="headerlink" title="五、网关"></a>五、网关</h2><p>网关用来控制流程的流向</p>
+<h3 id="5-1-排他网关ExclusiveGateway"><a href="#5-1-排他网关ExclusiveGateway" class="headerlink" title="5.1 排他网关ExclusiveGateway"></a>5.1 排他网关ExclusiveGateway</h3><h4 id="5-1-1-什么是排他网关："><a href="#5-1-1-什么是排他网关：" class="headerlink" title="5.1.1  什么是排他网关："></a>5.1.1  什么是排他网关：</h4><p>排他网关，用来在流程中实现决策。 当流程执行到这个网关，所有分支都会判断条件是否为true，如果为true则执行该分支，</p>
+<p><strong>注意</strong>：排他网关只会选择一个为true的分支执行。如果有两个分支条件都为true，排他网关会选择id值较小的一条分支去执行。</p>
+<p>为什么要用排他网关？</p>
+<p>不用排他网关也可以实现分支，如：在连线的condition条件上设置分支条件。</p>
+<p>在连线设置condition条件的缺点：如果条件都不满足，流程就结束了(是异常结束)。</p>
+<p>如果 使用排他网关决定分支的走向，如下：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577879740282.png" alt="1577879740282"></p>
+<p>如果从网关出去的线所有条件都不满足则系统抛出异常。</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>activiti<span class="token punctuation">.</span>engine<span class="token punctuation">.</span></span>ActivitiException</span><span class="token operator">:</span> <span class="token class-name">No</span> outgoing sequence flow of the exclusive gateway 'exclusivegateway1' could be selected <span class="token keyword">for</span> continuing the process
+   at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>activiti<span class="token punctuation">.</span>engine<span class="token punctuation">.</span>impl<span class="token punctuation">.</span>bpmn<span class="token punctuation">.</span>behavior<span class="token punctuation">.</span></span>ExclusiveGatewayActivityBehavior</span><span class="token punctuation">.</span><span class="token function">leave</span><span class="token punctuation">(</span><span class="token class-name">ExclusiveGatewayActivityBehavior</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">85</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="5-1-2-流程定义"><a href="#5-1-2-流程定义" class="headerlink" title="5.1.2  流程定义"></a>5.1.2  流程定义</h4><p> 排他网关图标，红框内：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577879961637.png" alt="1577879961637"></p>
+<h4 id="5-1-3-测试"><a href="#5-1-3-测试" class="headerlink" title="5.1.3  测试"></a>5.1.3  测试</h4><p>在部门经理审核后，走排他网关，从排他网关出来的分支有两条，一条是判断出差天数是否大于3天，另一条是判断出差天数是否小于等于3天。</p>
+<p>设置分支条件时，如果所有分支条件都不是true，报错：</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>activiti<span class="token punctuation">.</span>engine<span class="token punctuation">.</span></span>ActivitiException</span><span class="token operator">:</span> <span class="token class-name">No</span> outgoing sequence flow of the exclusive gateway 'exclusivegateway1' could be selected <span class="token keyword">for</span> continuing the process
+
+       at <span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>activiti<span class="token punctuation">.</span>engine<span class="token punctuation">.</span>impl<span class="token punctuation">.</span>bpmn<span class="token punctuation">.</span>behavior<span class="token punctuation">.</span></span>ExclusiveGatewayActivityBehavior</span><span class="token punctuation">.</span><span class="token function">leave</span><span class="token punctuation">(</span><span class="token class-name">ExclusiveGatewayActivityBehavior</span><span class="token punctuation">.</span>java<span class="token operator">:</span><span class="token number">85</span><span class="token punctuation">)</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="5-2-并行网关ParallelGateway"><a href="#5-2-并行网关ParallelGateway" class="headerlink" title="5.2 并行网关ParallelGateway"></a>5.2 并行网关ParallelGateway</h3><h4 id="5-2-1-什么是并行网关"><a href="#5-2-1-什么是并行网关" class="headerlink" title="5.2.1  什么是并行网关"></a>5.2.1  什么是并行网关</h4><p>并行网关允许将流程分成多条分支，也可以把多条分支汇聚到一起，并行网关的功能是基于进入和外出顺序流的：</p>
+<p>l  fork分支：</p>
+<p> 并行后的所有外出顺序流，为每个顺序流都创建一个并发分支。</p>
+<p>l  join汇聚： </p>
+<p>所有到达并行网关，在此等待的进入分支， 直到所有进入顺序流的分支都到达以后， 流程就会通过汇聚网关。</p>
+<p>注意，如果同一个并行网关有多个进入和多个外出顺序流， 它就同时具有分支和汇聚功能。 这时，网关会先汇聚所有进入的顺序流，然后再切分成多个并行分支。</p>
+<p><strong>与其他网关的主要区别是，并行网关不会解析条件。</strong> <strong>即使顺序流中定义了条件，也会被忽略。</strong></p>
+<p>例子：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586679201.png"></p>
+<p>说明：</p>
+<p>技术经理和项目经理是两个execution分支，在act_ru_execution表有两条记录分别是技术经理和项目经理，act_ru_execution还有一条记录表示该流程实例。</p>
+<p>待技术经理和项目经理任务全部完成，在汇聚点汇聚，通过parallelGateway并行网关。</p>
+<p>并行网关在业务应用中常用于会签任务，会签任务即多个参与者共同办理的任务。</p>
+<h4 id="5-2-2-流程定义"><a href="#5-2-2-流程定义" class="headerlink" title="5.2.2  流程定义"></a>5.2.2  流程定义</h4><p>并行网关图标，红框内：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1577880020127.png" alt="1577880020127"></p>
+<h4 id="5-2-3-测试"><a href="#5-2-3-测试" class="headerlink" title="5.2.3  测试"></a>5.2.3  测试</h4><p>当执行到并行网关数据库跟踪如下：</p>
+<p>当前任务表：SELECT * FROM act_ru_task   </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586680533.png"></p>
+<p>上图中：有两个任务当前执行。</p>
+<p>查询流程实例执行表：SELECT * FROM act_ru_execution </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586680570.png"></p>
+<p>上图中，说明当前流程实例有多个分支(两个)在运行。</p>
+<p>对并行任务的执行：</p>
+<p>并行任务执行不分前后，由任务的负责人去执行即可。</p>
+<p>执行技术经理任务后，查询当前任务表 SELECT * FROM act_ru_task   </p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586680672.png"></p>
+<p>已完成的技术经理任务在当前任务表act_ru_task_已被删除。</p>
+<p>在流程实例执行表：SELECT * FROM act_ru_execution有中多个分支存在且有并行网关的汇聚结点。</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586680728.png"></p>
+<p>有并行网关的汇聚结点：说明有一个分支已经到汇聚，等待其它的分支到达。</p>
+<p>当所有分支任务都完成，都到达汇聚结点后：</p>
+<p>流程实例执行表：SELECT * FROM act_ru_execution，执行流程实例已经变为总经理审批，说明流程执行已经通过并行网关</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586680801.png"></p>
+<p>总结：所有分支到达汇聚结点，并行网关执行完成。         </p>
+<h3 id="5-3-包含网关InclusiveGateway"><a href="#5-3-包含网关InclusiveGateway" class="headerlink" title="5.3    包含网关InclusiveGateway"></a>5.3    包含网关InclusiveGateway</h3><h4 id="5-3-1-什么是包含网关"><a href="#5-3-1-什么是包含网关" class="headerlink" title="5.3.1  什么是包含网关"></a>5.3.1  什么是包含网关</h4><p>包含网关可以看做是排他网关和并行网关的结合体。 </p>
+<p>和排他网关一样，你可以在外出顺序流上定义条件，包含网关会解析它们。 但是主要的区别是包含网关可以选择多于一条顺序流，这和并行网关一样。</p>
+<p>包含网关的功能是基于进入和外出顺序流的：</p>
+<p>l  分支： </p>
+<p>所有外出顺序流的条件都会被解析，结果为true的顺序流会以并行方式继续执行， 会为每个顺序流创建一个分支。</p>
+<p>l  汇聚：</p>
+<p> 所有并行分支到达包含网关，会进入等待状态， 直到每个包含流程token的进入顺序流的分支都到达。 这是与并行网关的最大不同。换句话说，包含网关只会等待被选中执行了的进入顺序流。 在汇聚之后，流程会穿过包含网关继续执行。</p>
+<h4 id="5-3-2-流程定义："><a href="#5-3-2-流程定义：" class="headerlink" title="5.3.2  流程定义："></a>5.3.2  流程定义：</h4><p>出差申请大于等于3天需要由项目经理审批，小于3天由技术经理审批，出差申请必须经过人事经理审批。</p>
+<p> 包含网关图标，红框内：</p>
+<p> <img src="/2023/03/07/activiti-jin-jie/assets/1577880080004.png" alt="1577880080004"></p>
+<p>定义流程：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586689674.png"></p>
+<p>注意：通过包含网关的每个分支的连线上设置condition条件。</p>
+<h4 id="5-3-3-测试"><a href="#5-3-3-测试" class="headerlink" title="5.3.3  测试"></a>5.3.3  测试</h4><p>如果包含网关设置的条件中，流程变量不存在，报错;</p>
+<pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name"><span class="token namespace">org<span class="token punctuation">.</span>activiti<span class="token punctuation">.</span>engine<span class="token punctuation">.</span></span>ActivitiException</span><span class="token operator">:</span> <span class="token class-name">Unknown</span> property used in expression<span class="token operator">:</span> $<span class="token punctuation">{</span>evection<span class="token punctuation">.</span>num<span class="token operator">&gt;=</span><span class="token number">3</span><span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>需要在流程启动时设置流程变量evection.num。</p>
+<p>1）、当流程执行到第一个包含网关后，会根据条件判断，当前要走哪几个分支：</p>
+<p>流程实例执行表：SELECT * FROM act_ru_execution</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586676678.png"></p>
+<p>第一条记录：包含网关分支。</p>
+<p>后两条记录代表两个要执行的分支：</p>
+<p>ACT_ID = “_13” 代表 项目经理神品</p>
+<p>ACT_ID = “_5” 代表 人事经理审批</p>
+<p>当前任务表：ACT_RU_TASK</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586676828.png"></p>
+<p>上图中，项目经理审批、人事经理审批 都是当前的任务，在并行执行。</p>
+<p>如果有一个分支执行先走到汇聚结点的分支，要等待其它执行分支走到汇聚。</p>
+<p>2）、先执行项目经理审批，然后查询当前任务表：ACT_RU_TASK</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586677325.png"></p>
+<p>当前任务还有人事经理审批需要处理。</p>
+<p>流程实例执行表：SELECT * FROM act_ru_execution</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586677432.png"></p>
+<p>发现人事经理的分支还存在，而项目经理分支已经走到ACT_ID = _18的节点。而ACT_ID=__18就是第二个包含网关</p>
+<p>这时，因为有2个分支要执行，包含网关会等所有分支走到汇聚才能执行完成。</p>
+<p>3）、执行人事经理审批</p>
+<p>然后查询当前任务表：ACT_RU_TASK</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586677665.png"></p>
+<p>当前任务表已经不是人事经理审批了，说明人事经理审批已经完成。 </p>
+<p>流程实例执行表：SELECT * FROM act_ru_execution</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586677735.png"></p>
+<p>包含网关执行完成，分支和汇聚就从act_ru_execution删除。</p>
+<p>小结：在分支时，需要判断条件，<strong>符合条件的分支，将会执行</strong>，符合条件的分支最终才进行汇聚。</p>
+<h3 id="5-4-事件网关EventGateway"><a href="#5-4-事件网关EventGateway" class="headerlink" title="5.4 事件网关EventGateway"></a>5.4 事件网关EventGateway</h3><p>事件网关允许根据事件判断流向。网关的每个外出顺序流都要连接到一个中间捕获事件。 当流程到达一个基于事件网关，网关会进入等待状态：会暂停执行。与此同时，会为每个外出顺序流创建相对的事件订阅。</p>
+<p>事件网关的外出顺序流和普通顺序流不同，这些顺序流不会真的”执行”， 相反它们让流程引擎去决定执行到事件网关的流程需要订阅哪些事件。 要考虑以下条件：</p>
+<ol>
+<li>事件网关必须有两条或以上外出顺序流；</li>
+<li>事件网关后，只能使用intermediateCatchEvent类型（activiti不支持基于事件网关后连接ReceiveTask）</li>
+<li>连接到事件网关的中间捕获事件必须只有一个入口顺序流。 </li>
+</ol>
+<h4 id="5-4-1流程定义"><a href="#5-4-1流程定义" class="headerlink" title="5.4.1流程定义"></a>5.4.1流程定义</h4><p>事件网关图标，红框内</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586666799.png" alt="1586666799"></p>
+<p>intermediateCatchEvent：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586667342.png"></p>
+<p>intermediateCatchEvent支持的事件类型：</p>
+<p>Message Event: 消息事件</p>
+<p>Singal Event：  信号事件</p>
+<p>Timer Event：  定时事件</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586667220.png"></p>
+<p>使用事件网关定义流程：</p>
+<p><img src="/2023/03/07/activiti-jin-jie/assets/1586694673.png"></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hydrangea.space" rel="external nofollow noreferrer">琉璃夜空</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://hydrangea.space/2023/03/07/activiti-jin-jie/">https://hydrangea.space/2023/03/07/activiti-jin-jie/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC-SA 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://hydrangea.space" target="_blank">琉璃夜空</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Activiti/">
+                                    <span class="chip bg-color">Activiti</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/03/07/activiti-zheng-he/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Activiti整合">
+                        
+                        <span class="card-title">Activiti整合</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-07
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            琉璃夜空
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Activiti/">
+                        <span class="chip bg-color">Activiti</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/11/activiti-ji-chu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="Activiti基础">
+                        
+                        <span class="card-title">Activiti基础</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            琉璃夜空
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Activiti/">
+                        <span class="chip bg-color">Activiti</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('40')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 琉璃夜空<br />'
+            + '文章作者: 琉璃夜空<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2019-2023</span>
+            
+            <a href="/about" target="_blank">琉璃夜空</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+
+
+    <a href="mailto:1297529755@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=1297529755" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 1297529755" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://hydrangea.space"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+        
+        <script type="text/javascript">
+            // 只在桌面版网页启用特效
+            var windowWidth = $(window).width();
+            if (windowWidth > 768) {
+                document.write('<script type="text/javascript" src="/libs/others/sakura-small.js"><\/script>');
+            }
+        </script>
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
