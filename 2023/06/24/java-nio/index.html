@@ -922,11 +922,11 @@ connectChannel<span class="token punctuation">.</span><span class="token functio
 
 <p><code>read()</code>和<code>write()</code>只有在connect之后才能使用，否则将抛出<strong>NotYetConnectException</strong>异常。用<code>read()</code>接收时，如果没有接收到包，会抛出<strong>PortUnreachableException</strong>异常。</p>
 <h2 id="第四章-Java-NIO（Buffer）"><a href="#第四章-Java-NIO（Buffer）" class="headerlink" title="第四章 Java NIO（Buffer）"></a>第四章 Java NIO（Buffer）</h2><h3 id="4-1-Buffer-简介"><a href="#4-1-Buffer-简介" class="headerlink" title="4.1 Buffer 简介"></a>4.1 Buffer 简介</h3><p>Java NIO中的Buffer用于和NIO通道进行交互。数据从通道读入缓冲区，从缓冲区写入到通道中。</p>
-<p><img src="/2023/06/24/java-nio/assets/buffer.png" alt="buffer"></p>
+<p><img src="/2023/06/24/java-nio/assets/Buffer.png" alt="buffer"></p>
 <p>缓冲区本质上是一块可以进行读写的内存。这块内存被封装成NIO Buffer对象，并提供了一组方法，用来方便的访问该块内存。缓冲区实际上是一个容器对象，各自对应各自类型的数组，如ByteBuffer为一个byte数组，在NIO中所有数据都由缓冲区来进行处理。</p>
 <p>读取数据时，从channel读取数据并写入到buffer中；写入数据时，读取buffer中的数据并写入到缓冲区中。而在面向IO流的系统中，所有数据都是直接写入或者直接将数据读取到Stream对象中的。</p>
 <p>在NIO中，所有的缓冲区类型都继承自抽象类Buffer，最常用的有ByteBuffer，对于Java中的基本类型，基本都有一个具体Buffer类型相对应，继承关系如下图所示：</p>
-<p><img src="/2023/06/24/java-nio/assets%5CBuffer-%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.png" alt="buffer-继承关系"></p>
+<p><img src="/2023/06/24/java-nio/assets/Buffer-%E7%BB%A7%E6%89%BF%E5%85%B3%E7%B3%BB.png" alt="buffer-继承关系"></p>
 <h3 id="4-2-Buffer的基本用法"><a href="#4-2-Buffer的基本用法" class="headerlink" title="4.2 Buffer的基本用法"></a>4.2 Buffer的基本用法</h3><p><strong>1、使用Buffer读写数据，一般遵循以下四个步骤：</strong></p>
 <ol>
 <li>写入数据到buffer</li>
@@ -1467,7 +1467,7 @@ sinkChannel<span class="token punctuation">.</span><span class="token function">
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token class-name">Path</span> path <span class="token operator">=</span> <span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"E:\\java\\nio"</span><span class="token punctuation">,</span> <span class="token string">"\\test\\test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>path<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 输出结果为E:\java\nio\test\test.txt</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h4 id="5、路径标准化"><a href="#5、路径标准化" class="headerlink" title="5、路径标准化"></a>5、路径标准化</h4><p>通过调用**Path.normalize()**方法可以使路径标准化。标准化意味着它将移除所有在路径字符串的中间的<code>.</code>和…代码，并解析路径字符串所引用的路径。</p>
+<h4 id="5、路径标准化"><a href="#5、路径标准化" class="headerlink" title="5、路径标准化"></a>5、路径标准化</h4><p>通过调用<code>Path.normalize()</code>方法可以使路径标准化。标准化意味着它将移除所有在路径字符串的中间的<code>.</code>和…代码，并解析路径字符串所引用的路径。</p>
 <pre class="line-numbers language-java" data-language="java"><code class="language-java"><span class="token comment">// 创建绝对路径</span>
 <span class="token class-name">Path</span> path <span class="token operator">=</span> <span class="token class-name">Paths</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token string">"E:\\java\\nio\\..\\test\\test.txt"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token class-name">Path</span> normalizePath <span class="token operator">=</span> path<span class="token punctuation">.</span><span class="token function">normalize</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
