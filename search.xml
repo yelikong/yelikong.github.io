@@ -4,13 +4,25 @@
   
     
     <entry>
-      <title></title>
+      <title>mysql metadata lock问题处理</title>
       <link href="/2023/10/18/mysql-shu-ju-ku-waiting-for-table-metadata-lock-wen-ti-chu-li/"/>
       <url>/2023/10/18/mysql-shu-ju-ku-waiting-for-table-metadata-lock-wen-ti-chu-li/</url>
       
         <content type="html"><![CDATA[<h2 id="MySQL出现Waiting-for-table-metadata-lock-原因方法"><a href="#MySQL出现Waiting-for-table-metadata-lock-原因方法" class="headerlink" title="MySQL出现Waiting for table metadata lock 原因方法"></a>MySQL出现Waiting for table metadata lock 原因方法</h2><p>问题记录处理</p><p>对表结构进行修改，修改重的状态强制关闭数据库软件，导致表结构修改的事务未提交。在事务没有完成之前，锁不会释放，对表的后续操作都将阻塞。</p><p>使用命令：</p><ul><li><p>show processlist; 查看表上有正在进行的操作。</p></li><li><p>kill 进程id；</p></li></ul><p>进入数据库information_schema的表<code>INNODB_TRX</code>查看与表相关的事务记录，找到对应的事务的线程id，即trx_mysql_thread_id字段，并使用<code>kill</code>命令将其杀死。</p><p>解决问题的参考网址：<a href="http://www.codebaoku.com/it-mysql/it-mysql-161086.html">http://www.codebaoku.com/it-mysql/it-mysql-161086.html</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> mysql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mysql </tag>
+            
+        </tags>
       
     </entry>
     

@@ -6,7 +6,7 @@
   <link href="https://hydrangea.space/atom.xml" rel="self"/>
   
   <link href="https://hydrangea.space/"/>
-  <updated>2023-10-18T09:05:24.243Z</updated>
+  <updated>2024-02-15T10:36:15.082Z</updated>
   <id>https://hydrangea.space/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
+    <title>mysql metadata lock问题处理</title>
     <link href="https://hydrangea.space/2023/10/18/mysql-shu-ju-ku-waiting-for-table-metadata-lock-wen-ti-chu-li/"/>
     <id>https://hydrangea.space/2023/10/18/mysql-shu-ju-ku-waiting-for-table-metadata-lock-wen-ti-chu-li/</id>
-    <published>2023-10-18T09:01:43.592Z</published>
-    <updated>2023-10-18T09:05:24.243Z</updated>
+    <published>2023-10-17T16:00:00.000Z</published>
+    <updated>2024-02-15T10:36:15.082Z</updated>
     
     
       
@@ -34,6 +34,10 @@
     
     
     
+    <category term="mysql" scheme="https://hydrangea.space/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="https://hydrangea.space/tags/mysql/"/>
     
   </entry>
   
